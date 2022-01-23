@@ -76,6 +76,7 @@ int main()
     Node *n2 = new Node(2);
     Node *n3 = new Node(3);
     Node *n4 = new Node(4);
+    
     root->neighbors = vector<Node *>{n2, n4};
     n2->neighbors = vector<Node *>{root, n3};
     n3->neighbors = vector<Node *>{n2, n4};
