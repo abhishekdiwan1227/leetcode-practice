@@ -3,26 +3,36 @@
 #include <map>
 #include <unordered_set>
 
-using namespace std;
-
 class Solution
 {
 public:
-    bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
+    bool canFinish(int numCourses, std::vector<std::vector<int>> pre)
     {
-        map<int, vector<int>> graph;
-        unordered_set<int> visited;
-        makeGraph(graph);
+        initAdjMatrix(pre);
+        for (int i = 0; i < numCourses; i++)
+        {
+            std::unordered_set<int> visited;
+        }
+
+        return true;
     }
 
 private:
-    void makeGraph(vector<vector<int>> &prerequisites, map<int, vector<int>> &graph)
+    std::map<int, std::unordered_set<int>> adjMatrix;
+
+    void initAdjMatrix(std::vector<std::vector<int>> pre)
     {
-        for (vector<int> item : prerequisites)
+        for (int i = 0; i < pre.size(); i++)
         {
-            if ()
+            int course = pre[i][0];
+            int preCourse = pre[i][1];
+            if (adjMatrix.find(course) != adjMatrix.end())
             {
-                graph[item[0]] = 
+                adjMatrix[course].insert(preCourse);
+            }
+            else
+            {
+                adjMatrix[course] = std::unordered_set<int>{preCourse};
             }
         }
     }
@@ -30,9 +40,9 @@ private:
 
 int main()
 {
-    int numCourses = 2;
-    vector<vector<int>> pre{{0, 1}, {1, 0}};
+    int numCourses = 4;
+    std::vector<std::vector<int>> pre{{0, 1}, {0, 2}, {2, 1}, {1, 3}};
     Solution sol = Solution();
-    cout << sol.canFinish(numCourses, pre);
+    sol.canFinish(numCourses, pre);
     return 0;
 }

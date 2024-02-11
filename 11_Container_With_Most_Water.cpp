@@ -14,14 +14,10 @@ public:
             int currHeight = std::min(heights[left], heights[right]);
             int currArea = currHeight * (right - left);
             maxArea = std::max(currArea, maxArea);
-
-            if(heights[left] < heights[right]) left++;
-            else if(heights[right] < heights[left]) right--;
-            else 
-            {
+            if (heights[left] < heights[left + 1])
                 left++;
+            if(heights[right] < heights[right - 1])
                 right--;
-            }
         }
 
         return maxArea;
