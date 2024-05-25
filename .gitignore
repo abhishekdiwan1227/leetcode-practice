@@ -1,6 +1,4 @@
-*
-!*.cpp
-!.gitignore
-.vscode
 .bin
+.mono
+.vscode
 scratchpad
