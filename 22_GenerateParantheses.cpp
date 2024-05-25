@@ -1,37 +1,32 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 class Solution
 {
 public:
     std::vector<std::string> generateParantheses(int n)
     {
-        if (n == 0)
-            return {};
-        std::vector<std::string> ans;
-        gen(ans, n - 1, n - 1, "");
-        return ans;
+        std::vector<std::string> results;
+        std::string current;
+
+        dfs(results, current, 0, 0, n);
+
+        return results;
     }
 
 private:
-    void gen(std::vector<std::string> &ans, int open, int close, std::string res)
+    void dfs(std::vector<std::string>& results, std::string curr, int open, int close, int n)
     {
-        if (open == 0 && close == 0)
+        if (open == n && close == n)
         {
-            res = "(" + res + ")";
-            ans.push_back(res);
+            std::cout << curr << "\n";
+            results.push_back(curr);
+            return;
         }
-        std::string curr = res;
-        if (open > 0)
-        {
-            curr += "(";
-            gen(ans, open - 1, close, curr);
-        }
-        if (close > 0)
-        {
-            curr += ")";
-            gen(ans, open, close - 1, curr);
-        }
+
+        if (open < n)
+            dfs(results, curr + "(", open + 1, close, n);
+        if (close < open)
+            dfs(results, curr + ")", open, close + 1, n);
     }
 };
 
